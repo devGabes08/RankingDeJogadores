@@ -21,4 +21,25 @@ public class ArvoreDeBuscaBinaria {
         }
         return atual;
     }
+
+    private Node busca(Node atual, String nome) {
+        if (atual == null) {
+            return null;
+        }
+
+        if (atual.getPlayer().getNickName().equals(nome)) {
+            return atual;
+        }
+
+        Node resultado = busca(atual.getEsquerda(), nome);
+
+        if (resultado != null) {
+            return resultado;
+        }
+        return busca(atual.getDireita(), nome);
+    }
+
+    public boolean busca(String nome) {
+        return busca(raiz, nome) != null;
+    }
 }

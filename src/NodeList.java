@@ -1,4 +1,8 @@
-package PACKAGE_NAME;
+public class NodeList<T> {
+    T data;
+    NodeList<T> next;
 
-public class NodeList {
+    public NodeList(T data) {
+        this.data = data;
+    }
 }

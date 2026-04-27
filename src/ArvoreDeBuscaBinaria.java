@@ -85,9 +85,13 @@ public class ArvoreDeBuscaBinaria {
             return null;
         } else {
             Node encontrado = busca(raiz, nome);
-            remove(raiz, encontrado.getPlayer().getRanking());
+            raiz = remove(raiz, encontrado.getPlayer().getRanking());
 
             return encontrado.getPlayer();
         }
+    }
+
+    public Node getRaiz() {
+        return raiz;
     }
 }

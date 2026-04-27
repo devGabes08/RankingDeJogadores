@@ -4,7 +4,7 @@ public class Player {
 
     public Player(String nickName, int ranking) {
         this.nickName = nickName;
-        this.ranking = 0;
+        this.ranking = ranking;
     }
 
     public int getRanking() {

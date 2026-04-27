@@ -42,4 +42,52 @@ public class ArvoreDeBuscaBinaria {
     public boolean busca(String nome) {
         return busca(raiz, nome) != null;
     }
+
+    private Node menorNo(Node atual) {
+        if (atual.getEsquerda() == null) {
+            return atual;
+        } else {
+            return menorNo(atual.getEsquerda());
+        }
+    }
+
+    private Node remove(Node atual, int ranking) {
+        if (atual == null) {
+            return null;
+        }
+
+        if (ranking < atual.getPlayer().getRanking()) {
+            atual.setEsquerda(remove(atual.getEsquerda() , ranking));
+        } else if (ranking > atual.getPlayer().getRanking()) {
+            atual.setDireita(remove(atual.getDireita() , ranking));
+        } else {
+            if (atual.getEsquerda() == null && atual.getDireita() == null) {
+                return null;
+            }
+
+            if (atual.getEsquerda() != null && atual.getDireita() == null) {
+                return atual.getEsquerda();
+            }
+
+            if (atual.getEsquerda() == null && atual.getDireita() != null) {
+                return atual.getDireita();
+            } else {
+                Node sucessor = menorNo(atual.getDireita());
+                atual.setPlayer(sucessor.getPlayer());
+                atual.setDireita(remove(atual.getDireita(), sucessor.getPlayer().getRanking()));
+            }
+        }
+        return atual;
+    }
+
+    public Player remove(String nome) {
+        if (!busca(nome)) {
+            return null;
+        } else {
+            Node encontrado = busca(raiz, nome);
+            remove(raiz, encontrado.getPlayer().getRanking());
+
+            return encontrado.getPlayer();
+        }
+    }
 }
